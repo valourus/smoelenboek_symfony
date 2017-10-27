@@ -1,0 +1,10 @@
+AppBundle\Entity\Student:
+    Student{1..10}:
+        image: '59e9a6ae975ef7.31233076.jpeg'
+        firstName: <firstName()>
+        lastName: <lastName()>
+        description: <sentence()>
+        plainPassword: 'qwerty'
+        email: <email()>
+        enabled: true
+        phoneNumber: <formatPhoneNumber()>

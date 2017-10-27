@@ -1,0 +1,22 @@
+body {
+    background-color: #FAFAFA;
+}
+.navbar {
+    background-color: #6882ad;
+}
+
+.fRight {
+    float: right;
+}
+
+.content {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.userProfilePicture {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}

@@ -1,0 +1,113 @@
+easy_admin:
+    site_name: De Haven<i>school</i>
+    list:
+        actions:
+            - { name: 'edit', icon: 'pencil', label: '' }
+            - { name: 'show', icon: 'info-circle', label: '' }
+            - { name: 'delete', icon: 'trash-o', label: ' ' }
+        title: 'Lijst van %%entity_label%%'
+    entities:
+        User:
+            class: AppBundle\Entity\Teacher
+            form:
+                title: 'Nieuwe leraar'
+                fields:
+                    - { property: 'imageFile', type: 'file', base_path: '%userphotopath%' }
+                    - { property: 'firstName', label: 'Voornaam' }
+                    - { property: 'insertion', label: 'Tussenvoegsel' }
+                    - { property: 'lastName', label: 'Achternaam' }
+                    - { property: 'phoneNumber', label: 'Telefoonnummer',  type: 'Misd\PhoneNumberBundle\Form\Type\PhoneNumberType', type_options: {widget: 'country_choice' } }
+                    - { property: 'plainPassword', type: 'password', label: 'password' }
+                    - { property: 'email', type: 'email', label: 'Email' }
+                form_options: { validation_groups: ['Profile'] }
+            label: "leraren"
+            list:
+                title: 'Lijst van leraren'
+                actions:
+                    - { name: 'new', label: 'Nieuwe Leraar' }
+                    - { name: resetPassword, icon: 'lock'}
+                fields:
+                    - 'id'
+                    - { property: 'image', type: 'image', base_path: '%userphotopath%', label: 'Foto', sortable: false }
+                    - { property: 'firstName', label: 'firstname', sortable: true }
+                    - { property: 'insertion', label: 'insertion', sortable: false }
+                    - { property: 'lastName', label: 'lastname', sortable: true }
+                    - { property: 'phoneNumber', template: 'phonenumber', label: 'Telefoonnummer', sortable: false}
+                    - { property: 'email', type: 'email', label: 'Email', sortable: false }
+                sort: 'id'
+            edit:
+                title: 'Bewerk leraar'
+                fields:
+                    - { property: 'imageFile', type: 'file', type_options: { required: false } }
+                    - { property: 'plainPassword', type: 'password', type_options: { required: false } }
+            show:
+                title: 'Leraar'
+                fields:
+                    - { property: 'image', type: 'image', base_path: '%userphotopath%', label: 'Foto', sortable: false }
+                    - { property: 'firstName', label: 'Voornaam' }
+                    - { property: 'insertion', label: 'Tussenvoegsel' }
+                    - { property: 'lastName', label: 'Achternaam' }
+                    - { property: 'phoneNumber', template: 'phonenumber', label: 'Telefoonnummer' }
+                    - { property: 'email', type: 'email', label: 'Email' }
+        Student:
+            class: AppBundle\Entity\Student
+            label: "leerlingen"
+            list:
+                title: 'Lijst van leerlingen'
+                actions:
+                    - { name: 'new', label: 'Nieuwe leerling' }
+                    - { name: resetPassword, icon: 'lock'}
+                fields:
+                    - 'id'
+                    - { property: 'image', type: 'image', base_path: '%userphotopath%', label: 'Foto', sortable: false }
+                    - { property: 'firstName', label: 'firstname', sortable: true }
+                    - { property: 'insertion', label: 'insertion', sortable: false }
+                    - { property: 'lastName', label: 'lastname', sortable: true }
+                    - { property: 'phoneNumber', label: 'Telefoonnummer', template: 'phonenumber',  sortable: false }
+                    - { property: 'email', type: 'email', label: 'Email', sortable: false }
+                sort: 'id'
+            show:
+                title: 'Leerling'
+                fields:
+                    - { property: 'image', type: 'image', base_path: '%userphotopath%', label: ' ' }
+                    - { property: 'firstName', label: 'Voornaam' }
+                    - { property: 'insertion', label: 'Tussenvoegsel' }
+                    - { property: 'lastName', label: 'Achternaam' }
+                    - { property: 'phoneNumber', template: 'phonenumber', label: 'Telefoonnummer' }
+                    - { property: 'email', type: 'email', label: 'Email' }
+                    - { property: 'description', label: 'Opmerkingen' }
+                    - { property: 'schoolClass', label: 'Klas' }
+            form:
+                fields:
+                    - { property: 'imageFile', type: 'file' }
+                    - { property: 'firstName', label: 'Voornaam' }
+                    - { property: 'insertion', label: 'Tussenvoegsel' }
+                    - { property: 'lastName', label: 'Achternaam' }
+                    - { property: 'phoneNumber', label: 'Telefoonnummer', type: 'Misd\PhoneNumberBundle\Form\Type\PhoneNumberType', type_options: {widget: 'country_choice' } }
+                    - { property: 'plainPassword', type: 'password', label: 'password' }
+                    - { property: 'email', type: 'email', label: 'Email' }
+                    - { property: 'schoolClass', label: 'Klas' }
+                form_options: { validation_groups: ['Profile'] }
+            edit:
+                title: 'Bewerk leerling'
+                fields:
+                    - { property: 'imageFile', type: 'file', type_options: { required: false } }
+                    - { property: 'plainPassword', type: 'password', type_options: { required: false } }
+        SchoolClass:
+            class: AppBundle\Entity\SchoolClass
+            label: "klassen"
+            list:
+                actions:
+                    - { name: 'new', label: 'Nieuwe klas' }
+            show:
+                title: 'Klas'
+                fields:
+                  - { property: 'name', label: 'Klasnaam'}
+                  - { property: 'slb', label: 'Slb-er'}
+                  - { property: 'students', label: 'leerlingen'}
+            form:
+                fields:
+                  - { property: 'name', label: 'Klasnaam'}
+                  - { property: 'slb', label: 'Slb-er', type: 'entity' }
+    design:
+        brand_color: '#6882ad'

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if is_granted("ROLE_TEACHER") %}
+        Je bent SLB-er van Klas
+    {% else %}
+        Je SLB-er is
+    {% endif %}
+    <div class="container content">
+        <div class="row">
+            <div class="col-sm">
+                <table class="table text-left">
+                    <thead class="thead-default">
+                    <tr>
+                        <th>#</th>
+                        <th>Photo</th>
+                        <th>Naam</th>
+                        <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users  %}
+                    <tr onclick="document.location = 'profile';">
+                        <th scope="row">{{ loop.index }}</th>
+                        <td><img width=150 height=100 class="img-thumbnail" src="{{ "uploads/images/userfotos/" ~ user.image }}"></td>
+                        <td>{{ user.fullName }}</td>
+                        <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    tr {
+        cursor: pointer;
+    }
+</style>
+{% endblock %}

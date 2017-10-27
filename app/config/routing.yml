@@ -1,0 +1,20 @@
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+#this will be deleted in the prod
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+easy_admin_bundle:
+    resource: "@AppBundle/Controller/Admin/AdminController.php"
+    type:     annotation
+    prefix: /admin

@@ -1,0 +1,8 @@
+#trans for easyadmin
+label.null: iets
+firstname: Voornaam
+insertion: Tussenvoegsel
+lastname: Achternaam
+This value is not a valid phone number.: Het ingevoerde telefoonnummer is onjuist!
+This item can't be deleted because other items depend on it.: Het ingevoerde telefoonnummer is onjuist!
+exception.translationParameters: lol
