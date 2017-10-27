@@ -9,13 +9,23 @@
 namespace AppBundle\Repository;
 
 
+use AppBundle\Entity\SchoolClass;
 use AppBundle\Entity\Student;
 
 class StudentRepository extends \Doctrine\ORM\EntityRepository {
 
     public function findAllExceptYourself(Student $student) {
-        $query = $this->createQueryBuilder("teacher")->andWhere("teacher.email != :email")
+        $query = $this->createQueryBuilder("student")->andWhere("student.email != :email")
             ->setParameter("email", $student->getEmail())->getQuery();
+        $query->execute();
+        return $query->getResult();
+    }
+
+    public function findAllStudentsInClass(SchoolClass $class) {
+        $query = $this->createQueryBuilder("student")
+            ->andWhere("student.schoolClass = :klasid")
+            ->setParameter("klasid", $class->getId())
+            ->getQuery();
         $query->execute();
         return $query->getResult();
     }

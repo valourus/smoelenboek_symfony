@@ -87,12 +87,14 @@ easy_admin:
                     - { property: 'plainPassword', type: 'password', label: 'password' }
                     - { property: 'email', type: 'email', label: 'Email' }
                     - { property: 'schoolClass', label: 'Klas' }
-                form_options: { validation_groups: ['Profile'] }
+            new:
+                form_options: { validation_groups: ['Registration'] }
             edit:
                 title: 'Bewerk leerling'
                 fields:
                     - { property: 'imageFile', type: 'file', type_options: { required: false } }
                     - { property: 'plainPassword', type: 'password', type_options: { required: false } }
+                form_options: { validation_groups: ['Profile'] }
         SchoolClass:
             class: AppBundle\Entity\SchoolClass
             label: "klassen"

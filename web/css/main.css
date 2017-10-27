@@ -10,7 +10,7 @@ body {
 }
 
 .content {
-    margin-top: 10%;
+    margin-top: 5%;
     text-align: center;
 }
 
@@ -19,4 +19,12 @@ body {
     height: 45px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.table-header {
+    font-size: 25px;
+}
+
+.clickable {
+    cursor: pointer;
 }

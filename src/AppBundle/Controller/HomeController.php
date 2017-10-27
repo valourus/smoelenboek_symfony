@@ -29,14 +29,21 @@ class HomeController extends Controller {
 
     public function teacherHomeAction() {
         $teachers = $this->getDoctrine()->getRepository("AppBundle:Teacher")->findAllExceptYourself($this->getUser());
+        $students = $this->getDoctrine()->getRepository("AppBundle:Student")->findAllStudentsInClass($this->getUser()->getSchoolClass());
         return $this->render("home/home.html.twig", [
             "users" => $teachers,
+            "students" => $students,
         ]);
     }
     public function studentHomeAction() {
         $users = $this->getUser()->getSchoolClass()->getStudents();
+        for($i = 0;$i < sizeof($users);$i++)
+            if($users[$i]->getEmail() == $this->getUser()->getEmail())
+                unset($users[$i]);
+        $slb = $this->getUser()->getSchoolClass()->getSlb();
         return $this->render("home/home.html.twig",[
             "users" => $users,
+            "slb" => $slb,
         ]);
     }
 }

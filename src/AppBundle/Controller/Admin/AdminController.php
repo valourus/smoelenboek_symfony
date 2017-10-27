@@ -30,9 +30,9 @@ class AdminController extends BaseAdminController {
     public function resetPasswordAction() {
         $id = $this->request->query->get('id');
         $user = $this->getDoctrine()->getRepository("AppBundle:Student")->find($id) ?: $this->getDoctrine()->getRepository("AppBundle:Teacher")->find($id);
-        if($user === null) {
+        if($user === null){
             $this->addFlash("danger", 'password is niet gereset');
-        } else {
+        } else{
             $user->setUpdatedAt(new \DateTime('now'));
             $user->setPlainPassword("qwerty");
             $em = $this->getDoctrine()->getManager();

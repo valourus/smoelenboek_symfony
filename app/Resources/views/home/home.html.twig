@@ -1,43 +1,77 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if is_granted("ROLE_TEACHER") %}
-        Je bent SLB-er van Klas
-    {% else %}
-        Je SLB-er is
-    {% endif %}
     <div class="container content">
+        <div class="text-center">
+            {% if is_granted("ROLE_TEACHER") %}
+                <p class="table-header">Collega's</p>
+            {% else %}
+                <div class="row">
+                    <a onclick="window.location = '/profile/{{ slb.slug }}'" class="clickable"> Je SLB-er is {{ slb.fullName }}</a>
+                </div>
+                <p class="table-header">Klasgenoten</p>
+            {% endif %}
+            <hr>
+        </div>
         <div class="row">
             <div class="col-sm">
                 <table class="table text-left">
                     <thead class="thead-default">
-                    <tr>
-                        <th>#</th>
-                        <th>Photo</th>
-                        <th>Naam</th>
-                        <th>Email</th>
-                    </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>Photo</th>
+                            <th>Naam</th>
+                            <th>Email</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {% for user in users  %}
-                    <tr onclick="document.location = 'profile';">
-                        <th scope="row">{{ loop.index }}</th>
-                        <td><img width=150 height=100 class="img-thumbnail" src="{{ "uploads/images/userfotos/" ~ user.image }}"></td>
-                        <td>{{ user.fullName }}</td>
-                        <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
-                    </tr>
-                    {% endfor %}
+                        {% for user in users  %}
+                        <tr class="clickable" onclick="document.location = 'profile/{{ user.slug }}';">
+                            <th scope="row">{{ loop.index }}</th>
+                            <td><img width=150 height=100 class="img-thumbnail" src="{{ "uploads/images/userfotos/" ~ user.image }}"></td>
+                            <td>{{ user.fullName }}</td>
+                            <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    {% if app.user.schoolClass and app.user.roles[0] == "ROLE_TEACHER" %}
+        <div class="container">
+            <div class="text-center">
+                <p class="table-header">Klas {{ app.user.schoolClass.name }}</p>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <table class="table text-left">
+                        <thead class="thead-default">
+                        <tr>
+                            <th>#</th>
+                            <th>Photo</th>
+                            <th>Naam</th>
+                            <th>Email</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for student in students  %}
+                            <tr class="clickable" onclick="document.location = 'profile/{{ student.slug }}';">
+                                <th scope="row">{{ loop.index }}</th>
+                                <td><img width=150 height=100 class="img-thumbnail" src="{{ "uploads/images/userfotos/" ~ student.image }}"></td>
+                                <td>{{ student.fullName }}</td>
+                                <td><a href="mailto:{{ student.email }}">{{ student.email }}</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block stylesheets %}
-<style>
-    tr {
-        cursor: pointer;
-    }
-</style>
+
 {% endblock %}
