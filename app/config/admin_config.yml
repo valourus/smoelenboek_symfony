@@ -12,7 +12,7 @@ easy_admin:
             form:
                 title: 'Nieuwe leraar'
                 fields:
-                    - { property: 'imageFile', type: 'file', base_path: '%userphotopath%' }
+                    - { property: 'imageFile', type: 'file', base_path: '%userphotopath%', type_options: { required: true } }
                     - { property: 'firstName', label: 'Voornaam' }
                     - { property: 'insertion', label: 'Tussenvoegsel' }
                     - { property: 'lastName', label: 'Achternaam' }

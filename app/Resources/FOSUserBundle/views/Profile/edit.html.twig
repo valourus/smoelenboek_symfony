@@ -1,0 +1,19 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div style="text-align: left" class="container content">
+        <h2 class="page-header">Gegevens aanpassen</h2>
+        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.insertion) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.phoneNumber) }}
+        {{ form_row(form.imageFile) }}
+        {{ form_row(form.current_password) }}
+        <div>
+            <input class="btn btn-success" type="submit" value="Bewerkingen opslaan"/>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock fos_user_content %}

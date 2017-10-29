@@ -29,7 +29,11 @@ class HomeController extends Controller {
 
     public function teacherHomeAction() {
         $teachers = $this->getDoctrine()->getRepository("AppBundle:Teacher")->findAllExceptYourself($this->getUser());
-        $students = $this->getDoctrine()->getRepository("AppBundle:Student")->findAllStudentsInClass($this->getUser()->getSchoolClass());
+        if($this->getUser()->isSlb()){
+            $students = $this->getDoctrine()->getRepository("AppBundle:Student")->findAllStudentsInClass($this->getUser()->getSchoolClass());
+        } else {
+            $students = null;
+        }
         return $this->render("home/home.html.twig", [
             "users" => $teachers,
             "students" => $students,

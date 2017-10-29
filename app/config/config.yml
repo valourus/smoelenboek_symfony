@@ -82,6 +82,9 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\User
+    profile:
+        form:
+            type: AppBundle\Form\UpdateForm
     from_email:
         address: "iets@localhost.com"
         sender_name: "mailer_user%"

@@ -4,9 +4,9 @@ body {
 .navbar {
     background-color: #6882ad;
 }
-
-.fRight {
-    float: right;
+#settings {
+    color: white;
+    margin-top: 10px;
 }
 
 .content {
@@ -27,4 +27,12 @@ body {
 
 .clickable {
     cursor: pointer;
+}
+.footer {
+    position: relative;
+    height: 45px;
+    bottom: 0;
+    width: 100%;
+    background-color: yellow;
+    margin-top: 35px;
 }

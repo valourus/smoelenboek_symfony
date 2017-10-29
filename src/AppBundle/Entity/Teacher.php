@@ -33,4 +33,8 @@ class Teacher extends User {
     public function getRoles() {
         return ['ROLE_TEACHER'];
     }
+
+    public function isSlb() {
+        return !is_null($this->schoolClass);
+    }
 }

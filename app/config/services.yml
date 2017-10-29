@@ -46,3 +46,6 @@ services:
         public: true
         tags:
             -  { name: nelmio_alice.faker.provider }
+    AppBundle\Form\UpdateForm:
+        tags:
+          - { name: form.type }
