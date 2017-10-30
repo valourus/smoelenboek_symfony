@@ -19,16 +19,24 @@ class UpdateForm extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-            ->add("firstName")
-            ->add("insertion")
-            ->add("lastName")
+            ->add("firstName", null,[
+                'label' => 'Voornaam',
+            ])
+            ->add("insertion", null, [
+                'label' => "Tussenvoegsel",
+            ])
+            ->add("lastName", null, [
+                'label' => 'Achternaam',
+            ])
             ->add("phoneNumber", PhoneNumberType::class, [
                 "widget" => PhoneNumberType::WIDGET_COUNTRY_CHOICE,
+                'label' => 'Telefoonnummer',
             ])
             ->add("imageFile", VichFileType::class, [
                 "required" => false,
                 'download_link' => false,
                 'allow_delete' => false,
+                'label' => 'Profiel foto',
             ])
             ->remove("username");
     }
