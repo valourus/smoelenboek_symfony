@@ -29,9 +29,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator {
     private $router;
     private $passwordEncoder;
     private $csrfTokenManager;
-    /**
-     * @var AuthorizationChecker
-     */
     private $authchecker;
 
     public function __construct(CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $em, RouterInterface $router, UserPasswordEncoderInterface $passwordEncoder, AuthorizationChecker $authChecker) {

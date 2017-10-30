@@ -30,8 +30,7 @@ class UpdateForm extends AbstractType {
                 'download_link' => false,
                 'allow_delete' => false,
             ])
-            ->remove("username")
-        ->remove("");
+            ->remove("username");
     }
 
     public function getParent() {
