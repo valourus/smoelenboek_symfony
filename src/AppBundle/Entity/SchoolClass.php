@@ -67,7 +67,10 @@ class SchoolClass {
     public function setSlb(Teacher $slb) {
         $this->slb = $slb;
     }
-
+    public function setStudent(Student $student) {
+        $this->students[] = $student;
+        $student->setSchoolClass($this);
+    }
     /**
      * @return ArrayCollection|Student[]
      */

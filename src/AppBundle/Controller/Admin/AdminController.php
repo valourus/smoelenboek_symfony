@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminContr
 use JavierEguiluz\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -79,7 +80,7 @@ class AdminController extends BaseAdminController {
             try {
                 $this->em->flush();
             } catch(UniqueConstraintViolationException $e) {
-                $this->addFlash("danger", "Deze email bestaat al!");
+                $editForm->get('email')->addError(new FormError('Deze email is al ingebruik!'));
                 return $this->render($this->entity['templates']['edit'], [
                     'form' => $editForm->createView(),
                     'entity_fields' => $fields,
@@ -99,6 +100,56 @@ class AdminController extends BaseAdminController {
             'entity_fields' => $fields,
             'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    protected function newAction()
+    {
+        $this->dispatch(EasyAdminEvents::PRE_NEW);
+
+        $entity = $this->executeDynamicMethod('createNew<EntityName>Entity');
+
+        $easyadmin = $this->request->attributes->get('easyadmin');
+        $easyadmin['item'] = $entity;
+        $this->request->attributes->set('easyadmin', $easyadmin);
+
+        $fields = $this->entity['new']['fields'];
+
+        $newForm = $this->executeDynamicMethod('create<EntityName>NewForm', array($entity, $fields));
+
+        $newForm->handleRequest($this->request);
+        if ($newForm->isSubmitted() && $newForm->isValid()) {
+            $this->dispatch(EasyAdminEvents::PRE_PERSIST, array('entity' => $entity));
+
+            $this->executeDynamicMethod('prePersist<EntityName>Entity', array($entity));
+
+            $this->em->persist($entity);
+            try {
+                $this->em->flush();
+            } catch(UniqueConstraintViolationException $e) {
+                $newForm->get('email')->addError(new FormError('Deze email is al ingebruik!'));
+                //dump($newForm);die;
+                return $this->render($this->entity['templates']['new'], array(
+                    'form' => $newForm->createView(),
+                    'entity_fields' => $fields,
+                    'entity' => $entity,
+                ));
+            }
+            $this->dispatch(EasyAdminEvents::POST_PERSIST, array('entity' => $entity));
+
+            return $this->redirectToReferrer();
+        }
+
+        $this->dispatch(EasyAdminEvents::POST_NEW, array(
+            'entity_fields' => $fields,
+            'form' => $newForm,
+            'entity' => $entity,
+        ));
+
+        return $this->render($this->entity['templates']['new'], array(
+            'form' => $newForm->createView(),
+            'entity_fields' => $fields,
+            'entity' => $entity,
         ));
     }
 }

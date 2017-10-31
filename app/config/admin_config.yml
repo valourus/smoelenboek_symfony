@@ -21,7 +21,6 @@ easy_admin:
                     - { property: 'phoneNumber', label: 'Telefoonnummer',  type: 'Misd\PhoneNumberBundle\Form\Type\PhoneNumberType', type_options: {widget: 'country_choice' } }
                     - { property: 'plainPassword', type: 'password', label: 'password' }
                     - { property: 'email', type: 'email', label: 'Email' }
-                form_options: { validation_groups: ['Profile'] }
             label: "leraren"
             list:
                 title: 'Lijst van leraren'
@@ -91,8 +90,6 @@ easy_admin:
                     - { property: 'plainPassword', type: 'password', label: 'password' }
                     - { property: 'email', type: 'email', label: 'Email' }
                     - { property: 'schoolClass', label: 'Klas' }
-            new:
-                form_options: { validation_groups: ['Registration'] }
             edit:
                 title: 'Bewerk leerling'
                 fields:
