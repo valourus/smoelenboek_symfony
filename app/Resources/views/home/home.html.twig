@@ -52,16 +52,24 @@
                             <th>#</th>
                             <th>Photo</th>
                             <th>Naam</th>
-                            <th>Email</th>
+                            <th>Opmerking</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for student in students  %}
-                            <tr class="clickable" onclick="document.location = 'profile/{{ student.slug }}';">
+                            <tr class="clickable">
                                 <th scope="row">{{ loop.index }}</th>
-                                <td><img width=150 height=100 class="img-thumbnail" src="{{ "uploads/images/userfotos/" ~ student.image }}"></td>
-                                <td>{{ student.fullName }}</td>
-                                <td><a href="mailto:{{ student.email }}">{{ student.email }}</a></td>
+                                <td onclick="document.location = 'profile/{{ student.slug }}';">
+                                    <img width=150 height=100 class="img-thumbnail" src="{{ "uploads/images/userfotos/" ~ student.image }}">
+                                </td>
+                                <td onclick="document.location = 'profile/{{ student.slug }}';">{{ student.fullName }}</td>
+                                <td>
+                                    <form id={{ loop.index}} method="POST">
+                                        <textarea form={{ loop.index }} class="form-control" name="description">{{ student.description }}</textarea><br>
+                                        <input type="hidden" name="student_id" value={{ student.id }}>
+                                        <input type="submit" value="Opslaan" class="btn btn-action">
+                                    </form>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -73,5 +81,4 @@
 {% endblock %}
 
 {% block stylesheets %}
-
 {% endblock %}

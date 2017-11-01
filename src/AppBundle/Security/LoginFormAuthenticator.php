@@ -72,6 +72,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator {
         if(!$user instanceof User) {
             throw new AuthenticationCredentialsNotFoundException();
         }
+        return $user;
     }
 
     public function checkCredentials($credentials, UserInterface $user) {

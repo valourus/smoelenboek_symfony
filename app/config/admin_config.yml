@@ -19,7 +19,7 @@ easy_admin:
                     - { property: 'insertion', label: 'Tussenvoegsel' }
                     - { property: 'lastName', label: 'Achternaam' }
                     - { property: 'phoneNumber', label: 'Telefoonnummer',  type: 'Misd\PhoneNumberBundle\Form\Type\PhoneNumberType', type_options: {widget: 'country_choice' } }
-                    - { property: 'plainPassword', type: 'password', label: 'password' }
+                    - { property: 'plainPassword', type: 'password', label: 'Wachtwoord', type_options: { required: true } }
                     - { property: 'email', type: 'email', label: 'Email' }
             label: "leraren"
             list:
@@ -87,7 +87,7 @@ easy_admin:
                     - { property: 'insertion', label: 'Tussenvoegsel' }
                     - { property: 'lastName', label: 'Achternaam' }
                     - { property: 'phoneNumber', label: 'Telefoonnummer', type: 'Misd\PhoneNumberBundle\Form\Type\PhoneNumberType', type_options: {widget: 'country_choice' } }
-                    - { property: 'plainPassword', type: 'password', label: 'password' }
+                    - { property: 'plainPassword', type: 'password', label: 'Wachtwoord', type_options: { required: true } }
                     - { property: 'email', type: 'email', label: 'Email' }
                     - { property: 'schoolClass', label: 'Klas' }
             edit:
