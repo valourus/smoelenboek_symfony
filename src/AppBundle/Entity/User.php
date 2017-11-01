@@ -40,10 +40,12 @@ abstract class User extends BaseUser {
     protected $slug;
     /**
      * @ORM\Column(type="string", nullable=false)
+     * @Assert\Image(maxSize="10000000000")
      */
     protected $image;
     /**
      * @Vich\UploadableField(mapping="user_images", fileNameProperty="image")
+     * @Assert\Image(maxSize="10000000000")
      * @var File
      */
     private $imageFile;

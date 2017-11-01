@@ -82,7 +82,7 @@ easy_admin:
                     - { property: 'schoolClass', label: 'Klas' }
             form:
                 fields:
-                    - { property: 'imageFile', type: 'file', type_options: { required: false } }
+                    - { property: 'imageFile', type: 'file', type_options: { required: true } }
                     - { property: 'firstName', label: 'Voornaam' }
                     - { property: 'insertion', label: 'Tussenvoegsel' }
                     - { property: 'lastName', label: 'Achternaam' }

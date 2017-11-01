@@ -2,6 +2,7 @@
 
 namespace AppBundle\Security;
 
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -11,6 +12,8 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
@@ -50,7 +53,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator {
         $csrfToken = $request->request->get("_csrf_token");
 
         if(false === $this->csrfTokenManager->isTokenValid(new CsrfToken('authenticate', $csrfToken))) {
-            throw new InvalidCsrfTokenException('invalid token!');
+            throw new InvalidCsrfTokenException('CSRF token fout!');
         }
         $request->getSession()->set(
             Security::LAST_USERNAME,
@@ -65,8 +68,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator {
 
     public function getUser($credentials, UserProviderInterface $userProvider) {
         $email = $credentials['email'];
-        return $this->em->getRepository('AppBundle:User')
-            ->findOneBy(['email' => $email]);
+        $user = $this->em->getRepository('AppBundle:User')->findOneBy(['email' => $email]);
+        if(!$user instanceof User) {
+            throw new AuthenticationCredentialsNotFoundException();
+        }
     }
 
     public function checkCredentials($credentials, UserInterface $user) {
