@@ -59,6 +59,16 @@
                 </ul>
             </div>
         </nav>
+        {% for msg in app.session.flashBag.get('success') %}
+            <div class="alert alert-success">
+                {{ msg }}
+            </div>
+        {% endfor %}
+        {% for msg in app.session.flashBag.get('danger') %}
+            <div class="alert alert-danger">
+                {{ msg }}
+            </div>
+        {% endfor %}
         {% block body %}{% endblock %}
         <footer class="footer">
             <div class=" ">
