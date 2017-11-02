@@ -38,9 +38,9 @@ abstract class User extends BaseUser {
      * @Gedmo\Slug(fields={"firstName", "lastName"})
      */
     protected $slug;
+    //
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Assert\Image(maxSize="10000000000")
      */
     protected $image;
     /**
@@ -48,7 +48,7 @@ abstract class User extends BaseUser {
      * @Assert\Image(maxSize="10000000000")
      * @var File
      */
-    private $imageFile;
+    protected $imageFile;
     /**
      * @ORM\Column(type="datetime")
      * @var \DateTime
@@ -75,7 +75,6 @@ abstract class User extends BaseUser {
     public function __construct() {
         parent::__construct();
         $this->enabled = true;
-        $this->username = $this->email;
     }
 
     public function getId() {
