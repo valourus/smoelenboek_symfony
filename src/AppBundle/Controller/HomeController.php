@@ -10,11 +10,18 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Form\DescriptionUpdateForm;
+use Doctrine\ORM\Mapping as ORM;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class HomeController
+ * @package AppBundle\Controller
+ * @Security("is_granted('ROLE_STUDENT') || is_granted('ROLE_TEACHER')")
+ */
 class HomeController extends Controller {
 
     /**

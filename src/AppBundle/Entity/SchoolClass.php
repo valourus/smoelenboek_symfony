@@ -78,6 +78,13 @@ class SchoolClass {
         return $this->students;
     }
 
+    public function isInClass(Student $user) {
+        foreach($this->students as $student)
+            if($student->getId() === $user->getId())
+                return true;
+        return false;
+    }
+
     public function __toString() {
         return $this->name;
     }
