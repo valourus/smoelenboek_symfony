@@ -36,6 +36,13 @@ class HomeController extends Controller {
         $this->createAccessDeniedException();
     }
 
+    /**
+     * @Route("home/klas", name="show_classes")
+     */
+    public function classAction() {
+        return $this->render("classes.html.twig");
+    }
+
     protected function teacherHomeAction(Request $request) {
         $teachers = $this->getDoctrine()->getRepository("AppBundle:Teacher")->findAllExceptYourself($this->getUser());
         if($this->getUser()->isSlb()){
