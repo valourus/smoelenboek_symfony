@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\StudentRepository")
@@ -24,6 +25,7 @@ class Student extends User {
 
     /**
      * @ORM\ManyToOne(targetEntity="SchoolClass", inversedBy="students")
+     * @Assert\NotBlank()
      */
     private $schoolClass;
 

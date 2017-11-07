@@ -21,7 +21,7 @@
                             <li><p><span class="fa fa-envelope" style="width:50px;"></span><a href={{ "mailto:" ~ user.email }}>{{ user.email }}</a></p></li>
                             {% if user.schoolClass and user.roles[0] == "ROLE_TEACHER" %}
                                 <li><p><span class="fa fa-users" style="width:50px;"></span>SLB-er van klas {{ user.schoolClass.name }}</p></li>
-                            {% elseif user.roles[0] == "ROLE_STUDENT" %}
+                            {% elseif user.roles[0] == "ROLE_STUDENT" and app.user.roles[0] == "ROLE_TEACHER" %}
                                 <li><p><span class="fa fa-users" style="width:50px;"></span>Zit in klas {{ user.schoolClass.name }}</p></li>
                                 <li><p><span class="fa fa-file-text" style="width:50px;"></span>{{ user.description }}</p></li>
                             {% endif %}
