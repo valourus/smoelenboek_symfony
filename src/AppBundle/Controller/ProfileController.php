@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ProfileController extends Controller {
 
     /**
-     * @Route("/profile/{slug}")
+     * @Route("/profile/{slug}", name="user_profile")
      */
     public function showProfileAction(User $user = null) {
         if($user == null || $this->getUser() == null)

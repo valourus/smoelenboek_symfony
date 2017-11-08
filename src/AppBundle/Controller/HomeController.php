@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\SchoolClass;
 use AppBundle\Form\DescriptionUpdateForm;
 use Doctrine\ORM\Mapping as ORM;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -37,14 +38,26 @@ class HomeController extends Controller {
     }
 
     /**
+<<<<<<< HEAD
      * @Route("home/klas", name="show_classes")
      */
     public function classAction() {
         return $this->render("classes.html.twig");
+=======
+     * @Route("/home/klas", name="show_classes")
+     * @Security("is_granted('ROLE_TEACHER')")
+     */
+    public function showClassesAction() {
+        $classes = $this->getDoctrine()->getRepository("AppBundle:SchoolClass")->findAll();
+        return $this->render("home/showClasses.html.twig", ["classes" => $classes]);
+>>>>>>> teachers can now see all the classes
     }
 
-    protected function teacherHomeAction(Request $request) {
-        $teachers = $this->getDoctrine()->getRepository("AppBundle:Teacher")->findAllExceptYourself($this->getUser());
+    /**
+     * @Route("/home/klas/{name}", name="show_class")
+     * @Security("is_granted('ROLE_TEACHER')")
+     */
+    public function showClassAction(Request $request, SchoolClass $class = null) {
         if($this->getUser()->isSlb()){
             $students = $this->getDoctrine()->getRepository("AppBundle:Student")->findAllStudentsInClass($this->getUser()->getSchoolClass());
             if($request->isMethod("POST")) {
@@ -54,9 +67,16 @@ class HomeController extends Controller {
             $students = null;
             $form = null;
         }
+        if($class === null)
+            return new Response("Deze klas bestaat niet!");
+        return $this->render("home/showClass.html.twig", ["class" => $class]);
+    }
+
+    protected function teacherHomeAction(Request $request) {
+        $teachers = $this->getDoctrine()->getRepository("AppBundle:Teacher")->findAllExceptYourself($this->getUser());
+
         return $this->render("home/home.html.twig", [
             "users" => $teachers,
-            "students" => $students,
         ]);
     }
 

@@ -31,8 +31,9 @@ body {
 .footer {
     position: relative;
     height: 45px;
+    color: #000000;
     bottom: 0;
     width: 100%;
-    background-color: yellow;
+    background-color: #6882ad;
     margin-top: 35px;
 }

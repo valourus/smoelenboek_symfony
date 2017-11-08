@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container content">
+        <div class="text-center">
+            <p class="table-header">Klassen</p>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <table class="table text-left">
+                    <thead class="thead-default">
+                    <tr>
+                        <th>#</th>
+                        <th>Klasnaam</th>
+                        <th>SLBer</th>
+                        <th>Aantal leerlingen</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for class in classes  %}
+                        <tr class="clickable" onclick="document.location = '{{ path('show_class', {'name' : class.name}) }}';">
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ class.name }}</td>
+                            <td><a href="{{ "../profile/" ~ class.slb.slug }}">{{ class.slb.fullName }}</a></td>
+                            <td>{{ class.students|length }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+

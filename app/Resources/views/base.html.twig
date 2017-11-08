@@ -8,7 +8,7 @@
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
+    <body id="body">
         <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -22,9 +22,16 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">Informatie</a>
                     </li>
-                    {% if app.user %}
+                    {% if is_granted("ROLE_STUDENT") %}
                         <li class="nav-item active">
-                            <a class="nav-link text-white" href={{ path('user_home') }}>Mijn overzicht<span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-white" href={{ path('user_home') }}>Mijn Klas<span class="sr-only">(current)</span></a>
+                        </li>
+                    {% elseif is_granted("ROLE_TEACHER") %}
+                        <li class="nav-item active">
+                            <a class="nav-link text-white" href={{ path('user_home') }}>Mijn Collega's<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link text-white" href={{ path('show_classes') }}>Alle Klassen<span class="sr-only">(current)</span></a>
                         </li>
                     {% endif %}
                     {% block custom_nav_links %}{% endblock %}
@@ -70,7 +77,7 @@
             </div>
         {% endfor %}
         {% block body %}{% endblock %}
-        <footer class="footer">
+        <footer id="footer" class="footer">
             <div class=" ">
                 <span class="text-muted">Place sticky footer content here.</span>
             </div>
@@ -80,4 +87,15 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     </body>
+    <script>
+        (function($) {
+            $.fn.hasScrollBar = function() {
+                return this.get(0).scrollHeight > this.height();
+            }
+        })(jQuery);
+        if($("#body").hasScrollBar()) {
+            alert("true");
+        }
+        alert("false");
+    </script>
 </html>
