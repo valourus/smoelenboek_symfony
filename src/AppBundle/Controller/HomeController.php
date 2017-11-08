@@ -38,19 +38,12 @@ class HomeController extends Controller {
     }
 
     /**
-<<<<<<< HEAD
-     * @Route("home/klas", name="show_classes")
-     */
-    public function classAction() {
-        return $this->render("classes.html.twig");
-=======
      * @Route("/home/klas", name="show_classes")
      * @Security("is_granted('ROLE_TEACHER')")
      */
     public function showClassesAction() {
         $classes = $this->getDoctrine()->getRepository("AppBundle:SchoolClass")->findAll();
         return $this->render("home/showClasses.html.twig", ["classes" => $classes]);
->>>>>>> teachers can now see all the classes
     }
 
     /**
@@ -60,9 +53,8 @@ class HomeController extends Controller {
     public function showClassAction(Request $request, SchoolClass $class = null) {
         if($this->getUser()->isSlb()){
             $students = $this->getDoctrine()->getRepository("AppBundle:Student")->findAllStudentsInClass($this->getUser()->getSchoolClass());
-            if($request->isMethod("POST")) {
+            if($request->isMethod("POST"))
                 $this->updateStudentDescription($request, $students);
-            }
         } else {
             $students = null;
             $form = null;
@@ -74,7 +66,6 @@ class HomeController extends Controller {
 
     protected function teacherHomeAction(Request $request) {
         $teachers = $this->getDoctrine()->getRepository("AppBundle:Teacher")->findAllExceptYourself($this->getUser());
-
         return $this->render("home/home.html.twig", [
             "users" => $teachers,
         ]);

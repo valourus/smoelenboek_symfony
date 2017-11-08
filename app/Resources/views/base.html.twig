@@ -8,7 +8,7 @@
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body id="body">
+    <body>
         <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -93,9 +93,6 @@
                 return this.get(0).scrollHeight > this.height();
             }
         })(jQuery);
-        if($("#body").hasScrollBar()) {
-            alert("true");
-        }
-        alert("false");
+        console.log($('#body').hasScrollBar());
     </script>
 </html>
